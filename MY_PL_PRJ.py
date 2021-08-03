@@ -6,6 +6,7 @@ from selenium.webdriver.common.by import By
 from time import sleep
 from datetime import datetime
 
+# set up a dictionary with the range of match id's that correspond to the season
 
 years = {"pl17_18": range(22342, 22721), "pl16_17": range(14040, 14419), "pl15_16": range(12115, 12494), "pl14_15": range(9611, 9990), "pl13_14": range(9231, 9610),
          "pl12_13": range(7864, 8243), "pl11_12": range(7467, 7846)}
@@ -19,6 +20,7 @@ def season_scraper(seasons):
         driver.get(url)
         driver.maximize_window()
         
+         # scraping the main page of the match, if there is an error on the page, the try except method is used to skip the page
         try:
             date = WebDriverWait(driver, 20).until(expected_conditions.element_to_be_clickable((
                 By.XPATH, '//*[@id="mainContent"]/div/section/div[2]/section/div[1]/div/div[1]/div[1]'))).text
@@ -38,9 +40,14 @@ def season_scraper(seasons):
             stats = dfs[-1]
 
             driver.quit()
-
-        h_stats = {}
-        a_stats = {}
+                
+         except:
+            driver.quit()
+            continue
+                  
+        # creating dictionaries, one for all the home stats (h) and one for the away stats (a)
+        h = {}
+        a = {}
 
         home = stats[h_team]
         away = stats[a_team]
@@ -69,7 +76,9 @@ def season_scraper(seasons):
         for stat in stats_check:
             columns.append(f'Home {stat}')
             columns.append(f'Away {stat}')
-
+         
+         # Writing the scraped data into a CSV file
+         
         dataset = pd.DataFrame(season_list, columns=columns)
         dataset.to_csv(f'{seasons}.csv', index=False)
     print('.csv file exported.')
