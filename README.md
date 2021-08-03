@@ -6,7 +6,7 @@ This python script extracts data from the Premier League Official website, from 
 
 ## Python Script Details:
 
-Main.py, uses the Selenium and pandas libraries. Using Selenium the program opens the premier league website and its corresponding links to scrape the necessary data by finding the it’s xpath to collect the match details and the stats of the match such as Result, possession, shots on target corners and offsides. This data is written to separate  csv files based on the season. 
+Final.py, uses the Selenium and pandas libraries. Using Selenium the program opens the premier league website and its corresponding links to scrape the necessary data by finding the it’s xpath to collect the match details and the stats of the match such as Result, possession, shots on target corners and offsides. This data is written to separate  csv files based on the season. 
 
 ## Data:
 
