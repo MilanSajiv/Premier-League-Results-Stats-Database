@@ -78,9 +78,8 @@ def season_scraper(seasons):
             columns.append(f'Away {stat}')
          
          # Writing the scraped data into a CSV file
-         
-        dataset = pd.DataFrame(season_list, columns=columns)
-        dataset.to_csv(f'{seasons}.csv', index=False)
+         dataset = pd.DataFrame(season_list, columns=columns)
+         dataset.to_csv(f'{seasons}.csv', index=False)
     print('.csv file exported.')
 
 for matches in years.values():
